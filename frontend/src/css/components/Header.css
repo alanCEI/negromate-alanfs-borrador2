@@ -105,10 +105,24 @@
 
 .mobile-menu-button {
   color: var(--sub-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  flex-shrink: 0; /* Evita que el botón se reduzca */
 }
+
+.mobile-menu-button:hover {
+  background-color: var(--dark-bg);
+}
+
 .menu-icon {
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 2rem; /* Tamaño más grande y visible */
+  width: 2rem;
+  min-height: 2rem; /* Asegura tamaño mínimo */
+  min-width: 2rem;
+  flex-shrink: 0; /* Evita que se reduzca en contenedores flex */
 }
 
 .cart-count-mobile {
@@ -137,5 +151,20 @@
 
   .cart-link {
     flex-shrink: 0; /* Evita que se reduzca en pantallas pequeñas */
+  }
+
+  .menu-icon {
+    height: 2rem; /* Mantiene el mismo tamaño en móvil */
+    width: 2rem;
+    min-height: 2rem;
+    min-width: 2rem;
+  }
+
+  .mobile-menu-button {
+    flex-shrink: 0; /* Evita que se reduzca en pantallas pequeñas */
+  }
+
+  .mobile-menu-container {
+    flex-shrink: 0; /* Evita que el contenedor se reduzca */
   }
 }

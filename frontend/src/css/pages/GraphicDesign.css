@@ -1,0 +1,131 @@
+/* frontend/src/css/pages/GraphicDesign.css */
+
+.gallery-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.gallery-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.gallery-item {
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  background-color: var(--dark-bg);
+}
+
+.gallery-item:hover {
+  background-color: #4a4a4a; /* Un poco más claro que dark-bg */
+}
+
+.gallery-item.selected {
+  background-color: var(--contrast-color);
+  color: var(--main-color);
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+.gallery-item-brand {
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.gallery-main {
+  position: sticky;
+  top: 6rem; /* Ajustar según la altura del header */
+  background-color: var(--dark-bg);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+.gallery-main-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.gallery-main-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--contrast-color);
+  margin-bottom: 0.5rem;
+}
+
+.price-card-section {
+  background-color: var(--dark-bg);
+}
+
+.price-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 72rem; /* 1152px */
+  margin: 0 auto;
+}
+
+.price-card {
+  background-color: var(--main-color);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--contrast-color);
+}
+
+.price-card-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--contrast-color);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.price-card-description {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--sub-contrast)
+}
+
+.price-card-price {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--contrast-color);
+}
+
+.price-card-details {
+  list-style: none;
+  margin-bottom: 2rem;
+  flex-grow: 1; /* Hace que esta sección crezca */
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.price-card-details li {
+  display: flex;
+  align-items: flex-start;
+}
+
+.price-card-details svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--contrast-color);
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.price-card .button {
+  margin-top: auto; /* Empuja el botón al final */
+  width: 100%;
+}

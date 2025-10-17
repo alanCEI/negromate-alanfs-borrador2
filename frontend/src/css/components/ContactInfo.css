@@ -1,0 +1,24 @@
+/* frontend/src/css/components/ContactInfo.css */
+.contact-info-section {
+  text-align: center;
+}
+
+.contact-info-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.contact-info-text {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  max-width: 42rem; /* 672px */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .contact-info-title {
+    font-size: 2.5rem;
+  }
+}

@@ -1,0 +1,43 @@
+/* frontend/src/css/pages/Profile.css */
+.profile-page {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.profile-toggle-buttons {
+  width: 100%;
+  max-width: 28rem; /* 448px */
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid var(--contrast-color);
+  margin-bottom: 2rem;
+}
+
+.toggle-button {
+  flex: 1;
+  padding: 0.75rem 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  transition: all 0.2s ease-in-out;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  color: var(--sub-color);
+}
+
+.toggle-button:hover {
+  background-color: var(--dark-bg);
+}
+
+.toggle-button.active {
+  background-color: var(--contrast-color);
+  color: var(--main-color);
+}

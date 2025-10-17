@@ -1,0 +1,48 @@
+### Variables
+@api_url = http://localhost:3000/api
+@jwt_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxOTQyMTk5NDE5NjEiLCJuYW1lIjoibmVncm9tYXRlIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.MgibxCifAvQyftRIMv9KvLlf3Wn4Efhft4pIkpS80NU
+
+#//////////////////////////////
+# AUTH ROUTES
+#//////////////////////////////
+
+### Registrar un nuevo usuario
+POST {{api_url}}/auth/register
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "email": "test@example.com",
+    "password": "password123"
+}
+
+### Iniciar sesión
+POST {{api_url}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "password": "password123"
+}
+
+
+#//////////////////////////////
+# PRODUCT ROUTES
+#//////////////////////////////
+
+### Obtener todos los productos
+GET {{api_url}}/products
+
+### Obtener productos de la categoría "Murals"
+GET {{api_url}}/products?category=Murals
+
+
+#//////////////////////////////
+# CONTENT ROUTES
+#//////////////////////////////
+
+### Obtener contenido de la sección "aboutUs"
+GET {{api_url}}/content/aboutUs
+
+### Obtener galería de "Murals"
+GET {{api_url}}/content/gallery-murals

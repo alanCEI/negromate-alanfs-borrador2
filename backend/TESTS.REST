@@ -1,14 +1,27 @@
 ### Variables
 @api_url = http://localhost:3000/api
-@jwt_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxOTQyMTk5NDE5NjEiLCJuYW1lIjoibmVncm9tYXRlIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.MgibxCifAvQyftRIMv9KvLlf3Wn4Efhft4pIkpS80NU
-@user_id = USER_ID_HERE
-@product_id = PRODUCT_ID_HERE
-@order_id = ORDER_ID_HERE
-@content_id = CONTENT_ID_HERE
+# Token del usuario ADMIN (admin@negromate.com / admin123)
+# Válido hasta: 2026-01-15 (90 días)
+@jwt_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZjJiMDI1MTlkNWJkMjFjZDQ2YjZjYyIsImlhdCI6MTc2MDczNjI3NywiZXhwIjoxNzY4NTEyMjc3fQ.OZJq4R1MgI_RkNX_PAGGXhJ8j_U8KtE1gx98I7O99rM
+@user_id = 68f2b02519d5bd21cd46b6cc
+@product_id = 68f2b7374f9e18e96989ddd6
+@order_id = 68f2b8264f9e18e96989ddec
+@content_id = 68f2b2ab3f8ac5046f8e81e8
 
 #//////////////////////////////
 # AUTH ROUTES
 #//////////////////////////////
+
+### Iniciar sesión como ADMIN (para renovar token)
+# Usuario: admin@negromate.com
+# Password: admin123
+POST {{api_url}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "admin@negromate.com",
+    "password": "admin123"
+}
 
 ### Registrar un nuevo usuario
 POST {{api_url}}/auth/register

@@ -1,5 +1,14 @@
 // Este archivo contiene los datos extraídos de tu web para poblar la base de datos.
 export const mockData = {
+    users: [
+        {
+            username: 'admin',
+            email: 'admin@negromate.com',
+            // Password hasheado de 'admin123' - se creará mediante el script createAdmin.js
+            // NO almacenar contraseñas en texto plano aquí
+            role: 'admin'
+        }
+    ],
     content: [
         {
             section: 'aboutUs',

@@ -113,3 +113,4 @@ Todos los endpoints tienen el prefijo `/api/`:
 - El código ahora es resiliente: funciona con o sin `/api/` en la variable de entorno
 - No es necesario modificar el código para cambiar entre desarrollo y producción
 - Solo debes actualizar `VITE_API_URL` según el ambiente
+

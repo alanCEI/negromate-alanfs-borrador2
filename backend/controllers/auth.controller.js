@@ -6,7 +6,7 @@ import { JWT_SECRET } from '../config/config.js';
 // Función para generar un token JWT
 const generateToken = (id) => {
     return jwt.sign({ id }, JWT_SECRET, {
-        expiresIn: '30d', // El token expira en 30 días
+        expiresIn: '90d', // El token expira en 90 días
     });
 };
 

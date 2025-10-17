@@ -1,6 +1,10 @@
 ### Variables
 @api_url = http://localhost:3000/api
 @jwt_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxOTQyMTk5NDE5NjEiLCJuYW1lIjoibmVncm9tYXRlIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.MgibxCifAvQyftRIMv9KvLlf3Wn4Efhft4pIkpS80NU
+@user_id = USER_ID_HERE
+@product_id = PRODUCT_ID_HERE
+@order_id = ORDER_ID_HERE
+@content_id = CONTENT_ID_HERE
 
 #//////////////////////////////
 # AUTH ROUTES
@@ -25,6 +29,38 @@ Content-Type: application/json
     "password": "password123"
 }
 
+### Obtener perfil del usuario autenticado
+GET {{api_url}}/auth/profile
+Authorization: Bearer {{jwt_token}}
+
+
+#//////////////////////////////
+# USER ROUTES (Admin only)
+#//////////////////////////////
+
+### Obtener todos los usuarios
+GET {{api_url}}/users
+Authorization: Bearer {{jwt_token}}
+
+### Obtener un usuario por ID
+GET {{api_url}}/users/{{user_id}}
+Authorization: Bearer {{jwt_token}}
+
+### Actualizar un usuario (Admin o el propio usuario)
+PUT {{api_url}}/users/{{user_id}}
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+    "username": "updatedusername",
+    "email": "updated@example.com",
+    "password": "newpassword123"
+}
+
+### Eliminar un usuario
+DELETE {{api_url}}/users/{{user_id}}
+Authorization: Bearer {{jwt_token}}
+
 
 #//////////////////////////////
 # PRODUCT ROUTES
@@ -36,13 +72,118 @@ GET {{api_url}}/products
 ### Obtener productos de la categoría "Murals"
 GET {{api_url}}/products?category=Murals
 
+### Obtener un producto por ID
+GET {{api_url}}/products/{{product_id}}
+
+### Crear un nuevo producto (Solo Admin)
+POST {{api_url}}/products
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+    "name": "Nuevo Producto",
+    "category": "GraphicDesign",
+    "price": 99.99,
+    "imageUrl": "https://example.com/image.jpg",
+    "description": "Descripción del producto",
+    "details": ["Detalle 1", "Detalle 2"]
+}
+
+### Actualizar un producto (Solo Admin)
+PUT {{api_url}}/products/{{product_id}}
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+    "name": "Producto Actualizado",
+    "price": 149.99,
+    "description": "Nueva descripción"
+}
+
+### Eliminar un producto (Solo Admin)
+DELETE {{api_url}}/products/{{product_id}}
+Authorization: Bearer {{jwt_token}}
+
+
+#//////////////////////////////
+# ORDER ROUTES
+#//////////////////////////////
+
+### Obtener todas las órdenes (Solo Admin)
+GET {{api_url}}/orders
+Authorization: Bearer {{jwt_token}}
+
+### Obtener las órdenes del usuario autenticado
+GET {{api_url}}/orders/myorders
+Authorization: Bearer {{jwt_token}}
+
+### Obtener una orden por ID
+GET {{api_url}}/orders/{{order_id}}
+Authorization: Bearer {{jwt_token}}
+
+### Crear una nueva orden
+POST {{api_url}}/orders
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+    "orderItems": [
+        {
+            "product": "{{product_id}}",
+            "quantity": 2
+        }
+    ]
+}
+
+### Actualizar el estado de una orden (Solo Admin)
+PUT {{api_url}}/orders/{{order_id}}
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+    "status": "completed"
+}
+
+### Eliminar una orden (Solo Admin)
+DELETE {{api_url}}/orders/{{order_id}}
+Authorization: Bearer {{jwt_token}}
+
 
 #//////////////////////////////
 # CONTENT ROUTES
 #//////////////////////////////
+
+### Obtener todo el contenido (Solo Admin)
+GET {{api_url}}/content
+Authorization: Bearer {{jwt_token}}
 
 ### Obtener contenido de la sección "aboutUs"
 GET {{api_url}}/content/aboutUs
 
 ### Obtener galería de "Murals"
 GET {{api_url}}/content/gallery-murals
+
+### Crear nuevo contenido (Solo Admin)
+POST {{api_url}}/content
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+    "section": "newSection",
+    "title": "Título de la sección",
+    "body": "Contenido de la sección"
+}
+
+### Actualizar contenido por ID (Solo Admin)
+PUT {{api_url}}/content/{{content_id}}
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+    "title": "Título actualizado",
+    "body": "Contenido actualizado"
+}
+
+### Eliminar contenido por ID (Solo Admin)
+DELETE {{api_url}}/content/{{content_id}}
+Authorization: Bearer {{jwt_token}}

@@ -1,4 +1,5 @@
-const API_URL = import.meta.env.VITE_API_URL;
+// Obtener la URL base del backend desde las variables de entorno
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 // Helper para manejar las respuestas de la API
 const handleResponse = async (response) => {
@@ -11,9 +12,20 @@ const handleResponse = async (response) => {
 };
 
 // Función genérica para hacer peticiones fetch
-export const apiRequest = async (endpoint, method = 'GET', body = null, token = null) => {
-    // Se asegura de que la URL se construya correctamente, evitando dobles barras (//)
-    const url = `${API_URL.replace(/\/$/, '')}/${endpoint.replace(/^\//, '')}`;
+export const apiRequest = async (endpoint, method = 'GET', body = null, token = null, options = {}) => {
+    // Construir la URL asegurándose de que siempre incluya /api/
+    // Si BASE_URL ya incluye /api, no se duplica
+    // Si BASE_URL no incluye /api, se agrega automáticamente
+    let baseUrl = BASE_URL.replace(/\/$/, ''); // Remover barra final si existe
+
+    // Si la URL base NO termina con /api, agregarlo
+    if (!baseUrl.endsWith('/api')) {
+        baseUrl = `${baseUrl}/api`;
+    }
+
+    // Construir URL final evitando barras dobles
+    const url = `${baseUrl}/${endpoint.replace(/^\//, '')}`;
+
     const headers = {
         'Content-Type': 'application/json',
         'accept': 'application/json',
@@ -23,17 +35,18 @@ export const apiRequest = async (endpoint, method = 'GET', body = null, token = 
         headers['Authorization'] = `Bearer ${token}`;
     }
 
-    const options = {
+    const fetchOptions = {
         method,
         headers,
+        ...options, // Permite pasar opciones adicionales como signal para AbortController
     };
 
     if (body) {
-        options.body = JSON.stringify(body);
+        fetchOptions.body = JSON.stringify(body);
     }
-    
+
     try {
-        const response = await fetch(url, options);
+        const response = await fetch(url, fetchOptions);
         return handleResponse(response);
     } catch (error) {
         console.error('API request error:', error);
@@ -41,22 +54,23 @@ export const apiRequest = async (endpoint, method = 'GET', body = null, token = 
     }
 };
 
-// Ejemplos de servicios específicos
+// Servicios específicos de la API
 export const api = {
     auth: {
-        login: (credentials) => apiRequest('auth/login', 'POST', credentials),
-        register: (userData) => apiRequest('auth/register', 'POST', userData),
-        getProfile: (token) => apiRequest('auth/profile', 'GET', null, token),
+        login: (credentials, options = {}) => apiRequest('auth/login', 'POST', credentials, null, options),
+        register: (userData, options = {}) => apiRequest('auth/register', 'POST', userData, null, options),
+        getProfile: (token, options = {}) => apiRequest('auth/profile', 'GET', null, token, options),
     },
     products: {
-        get: (category = '') => apiRequest(`products${category ? `?category=${category}` : ''}`),
-        getById: (id) => apiRequest(`products/${id}`),
+        get: (category = '', options = {}) => apiRequest(`products${category ? `?category=${category}` : ''}`, 'GET', null, null, options),
+        getById: (id, options = {}) => apiRequest(`products/${id}`, 'GET', null, null, options),
+        getWithGallery: (category, options = {}) => apiRequest(`products/category/${category}`, 'GET', null, null, options),
     },
     content: {
-        get: (sectionName) => apiRequest(`content/${sectionName}`),
+        get: (sectionName, options = {}) => apiRequest(`content/${sectionName}`, 'GET', null, null, options),
     },
     orders: {
-        create: (orderData, token) => apiRequest('orders', 'POST', orderData, token),
-        getMyOrders: (token) => apiRequest('orders/myorders', 'GET', null, token)
+        create: (orderData, token, options = {}) => apiRequest('orders', 'POST', orderData, token, options),
+        getMyOrders: (token, options = {}) => apiRequest('orders/myorders', 'GET', null, token, options)
     }
 };

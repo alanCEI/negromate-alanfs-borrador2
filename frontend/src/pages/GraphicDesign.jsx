@@ -44,14 +44,11 @@ const GraphicDesign = () => {
         const controller = new AbortController();
         const fetchData = async () => {
             try {
-                const [productsRes, galleryRes] = await Promise.all([
-                    api.products.get('GraphicDesign', { signal: controller.signal }),
-                    api.content.get('gallery-graphicDesign', { signal: controller.signal })
-                ]);
-                setProducts(productsRes.data);
-                setGallery(galleryRes.data);
-                if(galleryRes.data.length > 0) {
-                    setSelectedItem(galleryRes.data[0]);
+                const response = await api.products.getWithGallery('GraphicDesign', { signal: controller.signal });
+                setProducts(response.data.products);
+                setGallery(response.data.gallery);
+                if(response.data.gallery.length > 0) {
+                    setSelectedItem(response.data.gallery[0]);
                 }
             } catch (error) {
                  if (error.name !== 'AbortError') console.error("Error fetching data:", error);

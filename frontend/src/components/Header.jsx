@@ -17,9 +17,8 @@ const Header = () => {
         setIsMenuOpen(false);
     };
 
-    const NavLinks = ({ mobile = false }) => (
+    const NavLinks = () => (
         <>
-            <NavLink to="/" className={navLinkClass} onClick={handleMenuClick}>Inicio</NavLink>
             <NavLink to="/about" className={navLinkClass} onClick={handleMenuClick}>Sobre Nosotros</NavLink>
             <NavLink to="/contact" className={navLinkClass} onClick={handleMenuClick}>Contacto</NavLink>
             {user ? (
@@ -58,7 +57,7 @@ const Header = () => {
 
             {isMenuOpen && (
                 <nav className="mobile-nav">
-                    <NavLinks mobile={true} />
+                    <NavLinks />
                 </nav>
             )}
         </header>

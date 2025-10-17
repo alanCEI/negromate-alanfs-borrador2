@@ -29,12 +29,9 @@ const Murals = () => {
         const controller = new AbortController();
         const fetchData = async () => {
             try {
-                const [productsRes, galleryRes] = await Promise.all([
-                    api.products.get('Murals', { signal: controller.signal }),
-                    api.content.get('gallery-murals', { signal: controller.signal })
-                ]);
-                setProducts(productsRes.data);
-                setGallery(galleryRes.data);
+                const response = await api.products.getWithGallery('Murals', { signal: controller.signal });
+                setProducts(response.data.products);
+                setGallery(response.data.gallery);
             } catch (error) {
                  if (error.name !== 'AbortError') console.error("Error fetching data:", error);
             } finally {

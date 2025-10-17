@@ -5,11 +5,7 @@ import { connectDB } from './db/mongoose.js';
 import errorMiddleware from './middlewares/error.middleware.js';
 
 // Importar Rutas
-import authRoutes from './routes/auth.routes.js';
-import userRoutes from './routes/user.routes.js';
-import productRoutes from './routes/product.routes.js';
-import orderRoutes from './routes/order.routes.js';
-import contentRoutes from './routes/content.routes.js';
+import apiRoutes from './routes/index.routes.js';
 
 const app = express();
 
@@ -24,11 +20,7 @@ app.get('/', (req, res) => {
     res.json({ message: 'API de Negromate Creatives funcionando correctamente' });
 });
 
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/orders', orderRoutes);
-app.use('/api/content', contentRoutes);
+app.use('/api', apiRoutes);
 
 
 // Middleware de manejo de errores (debe ir al final)
@@ -37,7 +29,7 @@ app.use(errorMiddleware);
 const startServer = async () => {
     await connectDB();
     app.listen(PORT, () => {
-        console.log(`🚀 Servidor corriendo en http://localhost:${PORT}/api`);
+        console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
     });
 };
 
